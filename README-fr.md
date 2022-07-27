@@ -34,11 +34,11 @@ $ wget https://github.com/BuyWithCrypto/OneGitBackup/releases/download/v1.0/requ
 ```
 _2. Télécharger le fichier exécutable :_
 ```shell
-$ wget https://github.com/BuyWithCrypto/OneGitBackup/releases/download/v1.0/OneGitBackup.pyc
+$ wget https://github.com/BuyWithCrypto/OneGitBackup/releases/download/v1.0/OneGitBackup-fr.pyc
 ```
 _3. Démarrer l'exécutable :_
 ```shell
-$ python3 OneGitBackup.pyc
+$ python3 OneGitBackup-fr.pyc
 ```
 ------
 
@@ -54,7 +54,7 @@ $ pip install -r requirements.txt
 ```
 _3. Démarrer l'exécutable :_
 ```shell
-$ python main.py
+$ python main-fr.py
 ```
 ------
 
@@ -82,5 +82,5 @@ $ pip3 install -r requirements.txt
 _Pour compiler le code source en exécutable, vous pouvez utiliser cette commande. :_
 
 ```shell
-$ python3 -m py_compile main.py
+$ python3 -m py_compile main-fr.py
 ```

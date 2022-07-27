@@ -43,16 +43,16 @@ def main():
       https://www.buywithcrypto.fr
 
     """)
-    ask_1 = input(" Enter the name of your organization : ")
-    print(f"  Organization : {ask_1}\n")
-    ask_2 = input(" Would you like to make a backup of the Github public repositories ? (Y/n) ")
-    if ask_2 == "Y" or ask_2 == "Yes":
-        print("  Type of backup : Public Repos")
+    ask_1 = input(" Entrez le nom de votre organisation : ")
+    print(f"  Organisation : {ask_1}\n")
+    ask_2 = input(" Souhaitez-vous faire une backup des dépôts publics Github ? (O/n) ")
+    if ask_2 == "O" or ask_2 == "Oui":
+        print("  Type de backup : Dépôts Publics")
         clear()
         time.sleep(2)
         public_backups(ask_1)
     else:
-        print("  Type of backup : Private Repos")
+        print("  Type de backup : Dépôts Privés")
         clear()
         time.sleep(2)
         exit()
@@ -71,10 +71,10 @@ def public_backups(org_name):
             if path.exists(folder) == False:
                 mkdir(folder)
         print(f"""
-        Organization : {org_name}
-        Type of backup : Public Repos
-        Total number of repositories : {total_repos}
-        UUID of the backup : {folder}
+        Organisation : {org_name}
+        Type de backup : Dépôts Publics
+        Nombre total de dépôts : {total_repos}
+        UUID de la backup : {folder}
 
         """)
         for i in range(total_repos):
@@ -92,7 +92,7 @@ def public_backups(org_name):
                 file_backup_zip.close()
                 print(f"{local_file_backup_url} [{repo_branch_name}] - [OK]")
     except:
-        print("An error occurred and it was impossible to obtain the necessary data...")
+        print("Une erreur s'est produite impossible d'obtenir les données nécessaires...")
 
 
 if __name__ == "__main__":

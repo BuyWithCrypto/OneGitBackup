@@ -2,7 +2,7 @@
 
 This is a tool to make backups of organisations' Github repositories automatically.
 
-![Demo 1](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/1.png)
+![Demo 1](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/en/1.png)
 
 ------
 
@@ -12,15 +12,15 @@ This is a tool to make backups of organisations' Github repositories automatical
 
 We want to back up all the public repositories of our organisation and all their branches.
 
-![Demo 2](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/2.png)
+![Demo 2](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/en/2.png)
 
 A UUID (Universally unique identifier) will then be generated and this will be the folder name where the backup will be saved.
 
-![Demo 3](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/3.png)
+![Demo 3](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/en/3.png)
 
 Once the tool has completed its tasks, the backups will be available as a .zip file with the repository name as a prefix and the repository branch name as a suffix.
 
-![Demo 4](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/4.png)
+![Demo 4](https://raw.githubusercontent.com/BuyWithCrypto/OneGitBackup/main/demo/en/4.png)
 
 ------
 
