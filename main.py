@@ -79,14 +79,18 @@ def public_backups(org_name):
         """)
         for i in range(total_repos):
             local_file_backup_url = public_info[i]["html_url"]
-            file_backup_url = requests.get(local_file_backup_url+"/archive/refs/heads/main.zip")
-            file_backup_name = public_info[i]["name"]+".zip"
-            if file_backup_url.status_code == 404:
-                file_backup_url = requests.get(local_file_backup_url+"/archive/refs/heads/master.zip")
-            file_backup_zip = open(path.join(folder, file_backup_name), "wb")
-            file_backup_zip.write(file_backup_url.content)
-            file_backup_zip.close()
-            print(f"{local_file_backup_url} [OK]")
+            repo_name = public_info[i]["name"]
+            repo_branch = requests.get("https://api.github.com/repos/"+org_name+"/"+repo_name+"/branches")
+            repo_branch = repo_branch.content.decode("utf-8")
+            repo_branch = json.loads(repo_branch)
+            for j in range(len(repo_branch)):
+                repo_branch_name = repo_branch[j]["name"]
+                file_backup_url = requests.get(local_file_backup_url+"/archive/refs/heads/"+repo_branch_name+".zip")
+                file_backup_name = public_info[i]["name"]+"-"+repo_branch_name+".zip"
+                file_backup_zip = open(path.join(folder, file_backup_name), "wb")
+                file_backup_zip.write(file_backup_url.content)
+                file_backup_zip.close()
+                print(f"{local_file_backup_url} [{repo_branch_name}] - [OK]")
     except:
         print("Une erreur s'est produite impossible d'obtenir les données necessaires...")
 
