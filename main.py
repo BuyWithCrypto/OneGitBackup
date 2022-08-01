@@ -53,9 +53,14 @@ def main():
         public_backups(ask_1)
     else:
         print("  Type of backup : Private Repos")
+        print("\n - Please fill in your Github credentials. (https://github.com/settings/tokens)")
+        git_username = input(" Username [] : ")
+        print(f"  Username : {git_username}\n")
+        git_token = input(" Token [] : ")
+        print(f"  Token : {git_token}\n")
         clear()
         time.sleep(2)
-        exit()
+        private_backups(ask_1, git_username, git_token)
 
 def public_backups(org_name):
     try:
@@ -94,6 +99,42 @@ def public_backups(org_name):
     except:
         print("An error occurred and it was impossible to obtain the necessary data...")
 
+def private_backups(org_name, git_username, git_token):
+    try:
+        info = requests.get("https://api.github.com/orgs/"+org_name+"/repos?type=all", auth=(git_username, git_token))
+        info = info.content.decode("utf-8")
+        public_info = json.loads(info)
+        total_repos = len(public_info)
+        folder = str(uuid.uuid4())
+        if path.exists(folder) == False:
+            mkdir(folder)
+        else:
+            folder = str(uuid.uuid4())
+            if path.exists(folder) == False:
+                mkdir(folder)
+        print(f"""
+        Organization : {org_name}
+        Type of backup : Private Repos
+        Total number of repositories : {total_repos}
+        UUID of the backup : {folder}
+
+        """)
+        for i in range(total_repos):
+            local_file_backup_url = public_info[i]["html_url"]
+            repo_name = public_info[i]["name"]
+            repo_branch = requests.get("https://api.github.com/repos/"+org_name+"/"+repo_name+"/branches", auth=(git_username, git_token))
+            repo_branch = repo_branch.content.decode("utf-8")
+            repo_branch = json.loads(repo_branch)
+            for j in range(len(repo_branch)):
+                repo_branch_name = repo_branch[j]["name"]
+                file_backup_url = requests.get(local_file_backup_url+"/archive/refs/heads/"+repo_branch_name+".zip", auth=(git_username, git_token))
+                file_backup_name = public_info[i]["name"]+"-"+repo_branch_name+".zip"
+                file_backup_zip = open(path.join(folder, file_backup_name), "wb")
+                file_backup_zip.write(file_backup_url.content)
+                file_backup_zip.close()
+                print(f"{local_file_backup_url} [{repo_branch_name}] - [OK]")
+    except:
+        print("An error occurred and it was impossible to obtain the necessary data...")
 
 if __name__ == "__main__":
     main()
